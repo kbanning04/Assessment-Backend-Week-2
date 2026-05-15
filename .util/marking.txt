@@ -3,17 +3,23 @@ platform linux -- Python 3.12.13, pytest-9.0.3, pluggy-1.6.0
 rootdir: /home/runner/work/Assessment-Backend-Week-2/Assessment-Backend-Week-2/marine_experiments
 collected 73 items
 
-test_queries.py ......................F..F..F..F                         [ 43%]
-test_routes.py FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF                 [100%]
+test_queries.py ................................                         [ 43%]
+test_routes.py F.FFFFFFF.....FFFFFFFFFFFFFFFFFF....FFFFF                 [100%]
 
-======================== 45 failed, 28 passed in 9.84s =========================
+======================== 31 failed, 42 passed in 10.22s ========================
 ************* Module api
+marine_experiments/api.py:56:7: C0121: Comparison 'validate_score_over(score_over) == False' should be 'validate_score_over(score_over) is False' if checking for the singleton value False, or 'not validate_score_over(score_over)' if testing for falsiness (singleton-comparison)
+marine_experiments/api.py:89:0: C0116: Missing function or method docstring (missing-function-docstring)
+marine_experiments/api.py:99:12: W0719: Raising too general exception: Exception (broad-exception-raised)
+marine_experiments/api.py:104:0: C0116: Missing function or method docstring (missing-function-docstring)
+marine_experiments/api.py:104:22: W0622: Redefining built-in 'id' (redefined-builtin)
+marine_experiments/api.py:108:15: W0718: Catching too general exception Exception (broad-exception-caught)
+marine_experiments/api.py:107:23: E1121: Too many positional arguments for function call (too-many-function-args)
 marine_experiments/api.py:3:0: W0611: Unused datetime imported from datetime (unused-import)
-marine_experiments/api.py:5:0: W0611: Unused request imported from flask (unused-import)
 marine_experiments/api.py:6:0: W0611: Unused sql imported from psycopg2 (unused-import)
 ************* Module database_functions
 marine_experiments/database_functions.py:16:0: C0304: Final newline missing (missing-final-newline)
 
 ------------------------------------------------------------------
-Your code has been rated at 7.89/10 (previous run: 7.89/10, +0.00)
+Your code has been rated at 7.50/10 (previous run: 7.50/10, +0.00)
 
