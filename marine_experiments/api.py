@@ -40,24 +40,13 @@ def validate_score_over(score: str) -> bool:
     """ Validate if score is an integer in 0 -100 """
     score = int(score)
     if score < 0 or score > 100:
-        return False
-    return True
+        raise Exception("Invalid input")
+    return score
 
 
-@app.get("/experiment")
-def get_experiment():
-    """ Returns the experiments with a percentage above score and of experiment type 'type'."""
-    experiment_type = request.args.get("type")
-    score_over = request.args.get("score_over")
-
-    if not validate_type(experiment_type):
-        return {"error": "Invalid value for 'type' parameter"}, 400
-
-    if validate_score_over(score_over) == False:
-        return {"error": "Invalid value for 'score_over' parameter"}, 400
-
+def get_specific_experiments(experiment_type: str, score_over=int):
     with conn.cursor() as cursor:
-        query = """
+        query = f"""
         SELECT
             e.experiment_date,
             e.experiment_id,
@@ -75,15 +64,67 @@ def get_experiment():
         JOIN
             experiment_type AS et
             USING(experiment_type_id)
-        # WHERE
-        #     et.type_name = %(experiment_type)s
-        #     AND
-        #     ((e.score / et.max_score)*100) > %(score_over)s;
+        WHERE
+            et.type_name ILIKE '{experiment_type}'
+            AND
+            ((e.score / et.max_score)*100) > {score_over};
         """
-        cursor.execute(
-            query, {'experiment_type': experiment_type, 'score_over': score_over})
+        cursor.execute(query)
         result = cursor.fetchall()
         return result
+
+
+def get_all_experiments():
+    with conn.cursor() as cursor:
+        query = f"""
+        SELECT
+            e.experiment_date,
+            e.experiment_id,
+            et.type_name AS experiment_type,
+            CONCAT(ROUND(((e.score / et.max_score)*100), 2), '%') AS score,
+            sp.species_name AS species,
+            sb.subject_id
+        FROM
+            subject AS sb
+        JOIN
+            species AS sp
+            USING(species_id)
+        JOIN experiment AS e
+            USING(subject_id)
+        JOIN
+            experiment_type AS et
+            USING(experiment_type_id)
+        ORDER BY e.experiment_date DESC;
+        """
+        cursor.execute(query)
+        result = cursor.fetchall()
+    return result if result else {}
+
+
+@app.get("/experiment")
+def get_experiment():
+    """ Returns the experiments with a percentage above score and of experiment type 'type'."""
+    experiment_type = request.args.get("type")
+    score_over = request.args.get("score_over")
+
+    if experiment_type is None and score_over is None:
+        result = get_all_experiments()
+        return result
+
+    elif experiment_type is None:
+        experiment_type = 'intelligence'
+
+    if not validate_type(experiment_type):
+        return {"error": "Invalid value for 'type' parameter"}, 400
+
+    try:
+        validate_score_over(score_over)
+    except Exception:
+        return {"error": "Invalid value for 'score_over' parameter"}, 400
+    score = int(score_over)
+
+    dict = get_specific_experiments(experiment_type, score)
+    return dict
 
 
 def checking_valid_id():
@@ -118,7 +159,7 @@ def delete_experiment(id: int):
         """
         cursor.execute(query, {'id': valid_id})
         result = cursor.fetchall()
-        return result
+    return result
 
 
 if __name__ == "__main__":
