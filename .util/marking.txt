@@ -4,22 +4,28 @@ rootdir: /home/runner/work/Assessment-Backend-Week-2/Assessment-Backend-Week-2/m
 collected 73 items
 
 test_queries.py ................................                         [ 43%]
-test_routes.py F.FFFFFFF.....FFFFFFFFFFFFFFFFFF....FFFFF                 [100%]
+test_routes.py ...F.FFF..........FFFFFFFFFF...F....FFFFF                 [100%]
 
-======================== 31 failed, 42 passed in 10.22s ========================
+======================== 20 failed, 53 passed in 9.93s =========================
 ************* Module api
-marine_experiments/api.py:56:7: C0121: Comparison 'validate_score_over(score_over) == False' should be 'validate_score_over(score_over) is False' if checking for the singleton value False, or 'not validate_score_over(score_over)' if testing for falsiness (singleton-comparison)
-marine_experiments/api.py:89:0: C0116: Missing function or method docstring (missing-function-docstring)
-marine_experiments/api.py:99:12: W0719: Raising too general exception: Exception (broad-exception-raised)
-marine_experiments/api.py:104:0: C0116: Missing function or method docstring (missing-function-docstring)
-marine_experiments/api.py:104:22: W0622: Redefining built-in 'id' (redefined-builtin)
-marine_experiments/api.py:108:15: W0718: Catching too general exception Exception (broad-exception-caught)
-marine_experiments/api.py:107:23: E1121: Too many positional arguments for function call (too-many-function-args)
+marine_experiments/api.py:43:8: W0719: Raising too general exception: Exception (broad-exception-raised)
+marine_experiments/api.py:47:0: C0116: Missing function or method docstring (missing-function-docstring)
+marine_experiments/api.py:77:0: C0116: Missing function or method docstring (missing-function-docstring)
+marine_experiments/api.py:79:16: W1309: Using an f-string that does not have any interpolated variables (f-string-without-interpolation)
+marine_experiments/api.py:126:4: W0622: Redefining built-in 'dict' (redefined-builtin)
+marine_experiments/api.py:110:4: R1705: Unnecessary "elif" after "return", remove the leading "el" from "elif" (no-else-return)
+marine_experiments/api.py:122:11: W0718: Catching too general exception Exception (broad-exception-caught)
+marine_experiments/api.py:130:0: C0116: Missing function or method docstring (missing-function-docstring)
+marine_experiments/api.py:140:12: W0719: Raising too general exception: Exception (broad-exception-raised)
+marine_experiments/api.py:145:0: C0116: Missing function or method docstring (missing-function-docstring)
+marine_experiments/api.py:145:22: W0622: Redefining built-in 'id' (redefined-builtin)
+marine_experiments/api.py:149:15: W0718: Catching too general exception Exception (broad-exception-caught)
+marine_experiments/api.py:148:23: E1121: Too many positional arguments for function call (too-many-function-args)
 marine_experiments/api.py:3:0: W0611: Unused datetime imported from datetime (unused-import)
 marine_experiments/api.py:6:0: W0611: Unused sql imported from psycopg2 (unused-import)
 ************* Module database_functions
 marine_experiments/database_functions.py:16:0: C0304: Final newline missing (missing-final-newline)
 
 ------------------------------------------------------------------
-Your code has been rated at 7.50/10 (previous run: 7.50/10, +0.00)
+Your code has been rated at 7.26/10 (previous run: 7.26/10, +0.00)
 
